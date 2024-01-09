@@ -58,16 +58,23 @@ In this project, the user interface used two buttons as inputs. The first button
 
 ![Button](https://github.com/zczqy80/Watch-dog/assets/146266229/3ff20289-94bf-4440-8faa-439c6cb351fe)
 
-
 When the button is not pressed, its corresponding digital instrument reading is low, otherwise it is high. Therefore, it is possible to determine whether the button has been pressed by detecting the reading of the corresponding digital pin. After setting the counter, the number of times it has been pressed can be determined. When the number of presses reaches the upper limit, the count returns to 0.
 
 ![image](https://github.com/zczqy80/Watch-dog/assets/146266229/08dfbb48-cc5e-417c-8118-c4b5de365890)
 
 The complete code for the Button section has been uploaded.
 
+# DHT-22
 
+DHT-22 is used to detect the temperature and humidity of the environment when the project at quiet mode, After configuring the relevant libraries (<DHT.h>) in the Arduino IDE, the readings of the DHT-22 sensor can be read. The wireconnection between DHT-22 and Arduino UNO: 
 
+![DHT-22](https://github.com/zczqy80/Watch-dog/assets/146266229/fded99af-4a71-4e4f-81a7-88fb7e696987)
 
+In the programming of the Arduino IDE, the code to set up DHT-22 like following figure:
+
+<img width="600" alt="image" src="https://github.com/zczqy80/Watch-dog/assets/146266229/ec28aa49-f7d8-4cde-a96b-f7e2b710081a">
+
+Then, read the data of DHT-22 in the void of loop, the temperature and humidity could be measured. The complete code for the DHT-22 section has been uploaded.
 
 
 
