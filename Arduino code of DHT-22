@@ -1,0 +1,26 @@
+#include <DHT.h>
+#include <DHT_U.h>
+#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
+
+// DHT Sensor setup
+uint8_t DHTPin = 7;     
+DHT dht(DHTPin, DHTTYPE);   // Initialize DHT sensor.              
+
+void setup() {
+
+  Serial.begin(9600); 
+  pinMode(DHTPin, INPUT);
+  dht.begin();
+}
+
+void loop() {
+
+  int T = dht.readTemperature();
+  int H = dht.readHumidity();
+
+  Serial.println(T);
+  Serial.println(H);
+  Serial.println("-----------------------------");  
+
+  delay(10);
+}
