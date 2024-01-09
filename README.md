@@ -28,19 +28,29 @@ I2C LCD: Screen that can display text with I2C communication.
 
 # PIR (Passive infrared sensor)
 
-(PIR) work by detecting infrared radiation emitted by objects. When an object with thermal radiation enters the detection range of the sensor, it will produce measurable thermal radiation changes to the PIR. The wireconnection between PIR and Arduino UNO:
+PIR work by detecting infrared radiation emitted by objects. When an object with thermal radiation enters the detection range of the sensor, it will produce measurable thermal radiation changes to the PIR. The wireconnection between PIR and Arduino UNO:
 
 ![PIR](https://github.com/zczqy80/Watch-dog/assets/146266229/d387b905-8302-4bf4-87e3-9e38501d2cdb)
 
 
-In the code programming of the Arduino IDE, the value of PIR pin could be used to detect the movement, which like following figure:
+In the programming of the Arduino IDE, the value of PIR pin could be used to detect the movement, which like following figure:
 
 ![image](https://github.com/zczqy80/Watch-dog/assets/146266229/05413fa1-331d-4b2f-8816-937c789920c0)
 
 When an object moves within the detection range, the reading will become 1, otherwise it will be 0. The complete code for the PIR section has been uploaded.
 
+# HCSR-04
 
+HCSR-04 is a sensor used to measure the distance between itself and the obstacles ahead by ultrasonic waves, which has a non-contact measurement range from 2 cm to 400 cm with a measurement accuracy of 3 mm. The wireconnection between HCSR-04 and Arduino UNO:
 
+![HCSR-04](https://github.com/zczqy80/Watch-dog/assets/146266229/d4deaeb2-0583-410f-a61b-9d2bac45eb66)
+
+In the programming of the Arduino IDE, the code to drive HCSR-04 like following figure:
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/f0187882-d27f-4d73-86a7-a8e9f01356b9)
+
+As shown in the Figure 2-2, when the trigger was set to high, the chirped port would produce a set of 8 ultrasonic waves with a frequency of 40KHz. After a period of time, the echo port could receive the reflected wave. 
+The time that the echo port maintains at high was the total time of the ultrasonic wave from transmission to reflection to reception. Therefore, the distance between the module and the target can be calculated. The complete code for the PIR section has been uploaded.
 
 
 
