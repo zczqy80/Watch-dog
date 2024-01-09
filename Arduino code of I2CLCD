@@ -1,0 +1,23 @@
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2); // Replace 0x27 with the I2C address of the LCD
+
+void setup() {
+  Serial.begin(9600); // Initialize serial communication
+
+  lcd.init();
+  lcd.backlight();
+}
+
+void loop() {
+  lcd.setCursor(0, 0);
+  lcd.print("in:");
+  lcd.setCursor(5, 0);
+  lcd.print("test");
+  lcd.setCursor(0, 1);
+  lcd.print("out:");
+  lcd.setCursor(5, 1);
+  lcd.print("test");
+
+  delay(100);
+}
