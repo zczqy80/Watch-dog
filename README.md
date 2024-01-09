@@ -84,6 +84,36 @@ The buzzer could remind user with different tones when people enter or exit when
 
 The complete code for the Buzzer section has been uploaded, and here is a complete Buzzer project for reference: https://blog.csdn.net/c80486/article/details/52620972
 
+# I2C LCD
+
+LCD can display 16 by 2 characters. The LCD has multiple pins, each PIN has the following functions:
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/a15073b2-b41d-45ac-ad00-37f6d6eaa50a)
+
+The LCD has 4-bit and 8-bit operating modes, and in 4-bit operating mode, only four pins need to be connected as inputs. And set the other two pins to set the read/write status and Register selection bits respectively. The connection between the LCD and Arduino is as follows:
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/3a3f5e5d-9f64-44ab-94b1-a5f099728b0b)
+
+However, the LCD screen used in this project is equipped with an I2C module, which greatly simplifies the connection between it and Arduino, as shown in the following figure:
+
+![LCD](https://github.com/zczqy80/Watch-dog/assets/146266229/030a8b49-3957-4a4d-ac0d-8c29e723a1f2)
+
+The following is the configuration of an LCD equipped with an I2C module, which includes communication address, backlight, display bits, etc:
+
+<img width="600" alt="image" src="https://github.com/zczqy80/Watch-dog/assets/146266229/c5c2ab33-1730-49d3-ae2d-b75083179dac">
+
+After configuration is completed, the cursor can be set in the loop to determine the display position:
+
+<img width="300" alt="image" src="https://github.com/zczqy80/Watch-dog/assets/146266229/3ac34c73-662f-49ad-a82b-c8da52e19dc9">
+
+The complete code for the LCD section has been uploaded. If the program does not report an error and Lcd does not light up, it may be a problem with the communication address configuration of the LCD. You can visit the code in the following link to query the communication address of the LCD: https://blog.csdn.net/jh1513/article/details/90489191
+
+
+
+
+
+
+
 
 
 
