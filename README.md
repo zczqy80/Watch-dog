@@ -104,9 +104,37 @@ The following is the configuration of an LCD equipped with an I2C module, which 
 
 After configuration is completed, the cursor can be set in the loop to determine the display position:
 
-<img width="300" alt="image" src="https://github.com/zczqy80/Watch-dog/assets/146266229/3ac34c73-662f-49ad-a82b-c8da52e19dc9">
+<img width="200" alt="image" src="https://github.com/zczqy80/Watch-dog/assets/146266229/3ac34c73-662f-49ad-a82b-c8da52e19dc9">
 
 The complete code for the LCD section has been uploaded. If the program does not report an error and Lcd does not light up, it may be a problem with the communication address configuration of the LCD. You can visit the code in the following link to query the communication address of the LCD: https://blog.csdn.net/jh1513/article/details/90489191
+
+# Combined Project system 
+
+The circuit diagram of project were as follows:
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/0c7caea3-a5f4-4417-b9d6-2876f8001dd9)
+
+The packaging of the project adopted laser wooden boards, and the design diagram of package and the final hardware of project were as follows:
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/464f654b-d5b2-4a76-ab49-732e4efdbcc8)
+
+The file of box has been upload, The assembly process and final result of the box are as follows:
+
+![7514a2eafb72f0626adfc970f1b2781](https://github.com/zczqy80/Watch-dog/assets/146266229/49e0e191-3a55-4057-b011-51c045c82c5e)
+
+![25f38951df78903a7683c5fdb2d2c68](https://github.com/zczqy80/Watch-dog/assets/146266229/dbda3c64-0ca8-40d7-b3fb-fac92cd4bfed)
+
+![09fadce31bab4974c44cce4170604f0](https://github.com/zczqy80/Watch-dog/assets/146266229/be9f6db6-49fe-43e0-bfe4-fe9bb10c19f6)
+
+![3f0b5ae73d4dfa0f4dd1f1123680221](https://github.com/zczqy80/Watch-dog/assets/146266229/93883523-d1b2-43ad-80b3-c56210563ed3)
+
+![61d0a849854ba1bf05872f5e9be7fb8](https://github.com/zczqy80/Watch-dog/assets/146266229/2ad3bc1a-21e3-4ce6-a75f-cfec519e6b07)
+
+After the shell is assembled, the program is written into Arduino, and the flowchart of the program is shown below:
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/05f8a4ea-7f42-49b0-8e1d-2634982d11c8)
+
+The complete code for the project has been uploaded.
 
 
 
