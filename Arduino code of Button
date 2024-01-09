@@ -1,0 +1,31 @@
+const int buttonPin1 = 8; // The first button is connected to pin 8
+int buttonpress = 0;
+int limit = 60; // The initial limit for the first button is 60
+
+void setup() {
+  pinMode(buttonPin1, INPUT_PULLUP);
+  Serial.begin(9600); // Initialize serial communication
+}
+
+void loop() {
+  if (digitalRead(buttonPin1) == LOW) {
+    delay(100); 
+    if (buttonpress < 4) {
+      buttonpress++;
+    } else {
+      buttonpress = 0; 
+    }
+
+    limit = 60 + buttonpress * 20;
+
+    while (digitalRead(buttonPin1) == LOW) {
+      delay(10); // Wait for button release
+    }
+  }
+
+  Serial.println(buttonpress);
+  Serial.println(limit);
+  Serial.println("-----------------------------");  
+
+  delay(100);
+}
