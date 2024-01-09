@@ -76,6 +76,13 @@ In the programming of the Arduino IDE, the code to set up DHT-22 like following 
 
 Then, read the data of DHT-22 in the void of loop, the temperature and humidity could be measured. The complete code for the DHT-22 section has been uploaded.
 
+# Buzzer
+
+The buzzer could remind user with different tones when people enter or exit when the project at sound mode, The wireconnection between Buzzer and Arduino UNO: 
+
+![Buzzer](https://github.com/zczqy80/Watch-dog/assets/146266229/2cf1f8f8-a01b-4679-99fe-5e5527fad92b)
+
+The complete code for the Buzzer section has been uploaded, and here is a complete Buzzer project for reference: https://blog.csdn.net/c80486/article/details/52620972
 
 
 
