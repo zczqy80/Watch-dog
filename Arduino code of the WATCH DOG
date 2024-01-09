@@ -1,0 +1,212 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <DHT.h>
+#include <DHT_U.h>
+#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
+
+// DHT Sensor setup
+uint8_t DHTPin = 7;        // on Pin 12 of the Huzzah
+DHT dht(DHTPin, DHTTYPE);   // Initialize DHT sensor.
+
+LiquidCrystal_I2C lcd(0x27, 16, 2); // Replace 0x27 with the I2C address of the LCD
+
+const int pirPin1 = 4; // Digital pin connected to the first PIR sensor
+const int pirPin2 = 5; // Digital pin connected to the second PIR sensor
+
+const int buttonPin1 = 8; // First button connected to pin 8
+const int buttonPin2 = 9; // Second button connected to pin 9
+
+int buzzer = 6;
+
+int voice = 0;
+int voiceswitch = 0;
+
+int buttonpress = 0;
+
+int limit = 0; // Limit for the first button
+
+#define trigPin1 2  // Trig pin of the first sensor connected to Arduino digital pin 2
+#define echoPin1 3  // Echo pin of the first sensor connected to Arduino digital pin 3
+
+int incount = 0;
+int outcount = 0;
+
+int movement = 0;
+
+#define NTD1 294
+#define NTD7 556
+
+int tunein[] =
+{
+  NTD1
+};
+
+float durtin[] =
+{
+  1
+};
+
+int tuneout[] =
+{
+  NTD7
+};
+
+float durtout[] =
+{
+  1
+};
+
+void setup() {
+  pinMode(pirPin1, INPUT); // Set the first sensor pin to input mode
+  pinMode(pirPin2, INPUT); // Set the second sensor pin to input mode
+  pinMode(buttonPin1, INPUT_PULLUP);
+  pinMode(buttonPin2, INPUT_PULLUP);
+  pinMode(buzzer, OUTPUT);
+
+  pinMode(trigPin1, OUTPUT);
+  pinMode(echoPin1, INPUT);
+  Serial.begin(9600); // Initialize serial communication
+
+  lcd.init();
+  lcd.backlight();
+
+  pinMode(DHTPin, INPUT);
+  dht.begin();
+}
+
+void loop() {
+  long duration1, distance1;
+
+  if (digitalRead(buttonPin1) == LOW) {
+    delay(100); // Prevent button bouncing
+    lcd.clear();
+    if (buttonpress < 6) {
+      buttonpress++;
+    } else {
+      buttonpress = 0; // Restart when the value reaches the limit
+    }
+
+    while (digitalRead(buttonPin1) == LOW) {
+      delay(10); // Wait for button release
+    }
+  }
+
+  limit = buttonpress * 40;
+
+  if (digitalRead(buttonPin2) == LOW) {
+    delay(100); // Prevent button bouncing
+    lcd.clear();
+    if (voiceswitch == 0) {
+      voiceswitch = 1;
+    } else {
+      voiceswitch = 0; // Restart when the value reaches the limit
+    }
+
+    while (digitalRead(buttonPin1) == LOW) {
+      delay(10); // Wait for button release
+    }
+  }
+
+  int pirState1 = digitalRead(pirPin1); // Read the state of the first sensor
+  int pirState2 = digitalRead(pirPin2); // Read the state of the second sensor
+
+  if (pirState1 == HIGH && pirState2 == LOW) { // If an object moves from sensor 1 to sensor 2
+    digitalWrite(trigPin1, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin1, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin1, LOW);
+    duration1 = pulseIn(echoPin1, HIGH);
+    distance1 = duration1 * 0.034 / 2;
+    if (distance1 > 0 && distance1 <= limit) {
+      Serial.println("people in");
+      lcd.clear();
+      incount++;
+      movement = 1;
+      voice = 1;
+      pirState1 = 0;
+      pirState2 = 0;
+    }
+  } else if (pirState1 == LOW && pirState2 == HIGH) { // If an object moves from sensor 2 to sensor 1
+    digitalWrite(trigPin1, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin1, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin1, LOW);
+    duration1 = pulseIn(echoPin1, HIGH);
+    distance1 = duration1 * 0.034 / 2;
+    if (distance1 > 0 && distance1 <= limit) {
+      Serial.println("people out");
+      lcd.clear();
+      outcount++;
+      movement = 1;
+      voice = 2;
+      pirState1 = 0;
+      pirState2 = 0;
+    }
+  } else {
+    Serial.println("No movement detected");
+  }
+
+  int T = dht.readTemperature();
+  int H = dht.readHumidity();
+
+  lcd.setCursor(0, 0);
+  lcd.print("in:");
+  lcd.setCursor(4, 0);
+  lcd.print(incount);
+
+  lcd.setCursor(8, 0);
+  lcd.print("dis:");
+  lcd.setCursor(12, 0);
+  lcd.print(limit);
+
+  lcd.setCursor(0, 1);
+  lcd.print("out:");
+  lcd.setCursor(4, 1);
+  lcd.print(outcount);
+
+  if (voiceswitch == 1) {
+    lcd.setCursor(8, 1);
+    lcd.print("mode:Bark");
+  } else {
+    lcd.setCursor(8, 1);
+    lcd.print("T:");
+    lcd.setCursor(10, 1);
+    lcd.print(T);
+    lcd.setCursor(12, 1);
+    lcd.print("H:");
+    lcd.setCursor(14, 1);
+    lcd.print(H);
+  }
+
+  if (movement == 1) {
+    if (voiceswitch == 1) {
+
+      if (voice == 1) {
+        for (int x = 0; x < 2; x++) {
+          tone(buzzer, tunein[x]);
+          delay(500 * durtin[x]);
+          noTone(buzzer);
+        }
+        delay(1500);
+        movement = 0;
+      }
+      if (voice == 2) {
+        for (int x = 0; x < 2; x++) {
+          tone(buzzer, tuneout[x]);
+          delay(500 * durtout[x]);
+          noTone(buzzer);
+        }
+        delay(1500);
+        movement = 0;
+      }
+    } else {
+      delay(2000);
+      movement = 0;
+    }
+  }
+  pirState1 = 0;
+  pirState2 = 0;
+  delay(10);
+}
