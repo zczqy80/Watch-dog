@@ -136,7 +136,53 @@ After the shell is assembled, the program is written into Arduino, and the flowc
 
 The complete code for the project has been uploaded.
 
+# Test and result
 
+A series of tests were conducted on the functionality of the project, and the test results are as follows:
+
+1.	The project could successfully detect the direction of personnel in and out, so as to separately count the amount of personnel in and out, and displayed it on the LCD in real time. The measured distance of the item was also changed with the distance adjustment button.
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/98cb4ade-6d56-4c7b-baa8-7c6572185c44)
+
+2.	When the project was in non-silent mode, it could remind the user through different tones when someone entered or exited. If someone entered the classroom, the buzzer would emit a high syllable, while someone leaved the classroom, the buzzer would emit a low syllable.
+
+3.	When the project was adjusted to silent mode, and the current temperature and humidity could also be displayed on the LCD. 
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/ea0aea5b-2cb7-42bd-abef-01a60410b52e)
+
+4.	When someone passed through the project quickly or simultaneously, the direction or amount of people flow detection might go wrong. This has been improved by adding isolation covers to the two PIRs.
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/0a6455bf-7f1f-4475-9a26-090bc7f807cf)
+
+# Future work
+
+1.	Limit the measurement range of a single PIR. 
+2.	Increase the sampling frequency during continuous detection. 
+3.	Add a master-slave structure to completely separate the two PIRs. 
+4.	Enhance the connectivity between DHT-22 and main function.
+
+# References
+
+During the progress of this project, relevant data or inspiration was obtained from the following webpage:
+
+PIR------The datasheet of PIR: https://www.farnell.com/datasheets/2718281.pdf
+
+HCSR-04------The datasheet of HCSR-04: https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf
+
+Button------CASA0016 Workshop2: https://workshops.cetools.org/codelabs/CASA0016-Workshop-2/index.html#3 
+
+DHT-22------CASA0016 Workshop4: https://workshops.cetools.org/codelabs/CASA0016-Workshop-4/index.html#3 
+
+
+
+
+
+
+
+
+
+  
+      
 
 
 
