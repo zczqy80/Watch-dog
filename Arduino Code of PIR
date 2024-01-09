@@ -1,0 +1,51 @@
+const int pirPin1 = 4; // Digital pin connected to the first PIR sensor
+const int pirPin2 = 5; // Digital pin connected to the second PIR sensor
+
+int incount = 0;
+int outcount = 0;
+
+int movement = 0;
+
+void setup() {
+  pinMode(pirPin1, INPUT); // Set the first sensor pin to input mode
+  pinMode(pirPin2, INPUT); // Set the second sensor pin to input mode
+  Serial.begin(9600); // Initialize serial communication
+}
+
+void loop() {
+  int pirState1 = digitalRead(pirPin1); // Read the state of the first sensor
+  int pirState2 = digitalRead(pirPin2); // Read the state of the second sensor
+
+  if (pirState1 == HIGH && pirState2 == LOW) { // If an object moves from sensor 1 to sensor 2
+    Serial.println("people in");
+    incount++;
+    movement = 1;
+    pirState1 = 0;
+    pirState2 = 0;
+  } 
+  
+  else if (pirState1 == LOW && pirState2 == HIGH) { // If an object moves from sensor 2 to sensor 1
+    Serial.println("people out");
+    outcount++;
+    movement = 1;
+    pirState1 = 0;
+    pirState2 = 0;
+  } 
+  
+  else {
+    Serial.println("No movement detected");
+  }
+
+  Serial.print("in:");
+  Serial.println(incount);
+  Serial.print("out:");
+  Serial.println(outcount);
+  Serial.println("-----------------------------");  
+  
+  if(movement == 1){
+    delay(3000);
+    movement = 0;
+  }
+
+  delay(100);
+}
