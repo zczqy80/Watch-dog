@@ -52,6 +52,19 @@ In the programming of the Arduino IDE, the code to drive HCSR-04 like following 
 As shown in the Figure 2-2, when the trigger was set to high, the chirped port would produce a set of 8 ultrasonic waves with a frequency of 40KHz. After a period of time, the echo port could receive the reflected wave. 
 The time that the echo port maintains at high was the total time of the ultrasonic wave from transmission to reflection to reception. Therefore, the distance between the module and the target can be calculated. The complete code for the PIR section has been uploaded.
 
+# Buttons
+
+In this project, the user interface used two buttons as inputs. The first button was used as the adjustment button for the distance detection range which changed in units of 40cm between 0 and 240cm, while the second button was used to switch the output mode of the project back and forth between silent and audible modes. The wireconnection between single button and Arduino UNO:
+
+![Button](https://github.com/zczqy80/Watch-dog/assets/146266229/3ff20289-94bf-4440-8faa-439c6cb351fe)
+
+
+When the button is not pressed, its corresponding digital instrument reading is low, otherwise it is high. Therefore, it is possible to determine whether the button has been pressed by detecting the reading of the corresponding digital pin. After setting the counter, the number of times it has been pressed can be determined. When the number of presses reaches the upper limit, the count returns to 0.
+
+![image](https://github.com/zczqy80/Watch-dog/assets/146266229/08dfbb48-cc5e-417c-8118-c4b5de365890)
+
+The complete code for the Button section has been uploaded.
+
 
 
 
