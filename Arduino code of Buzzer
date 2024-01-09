@@ -1,0 +1,50 @@
+int buzzer = 6;
+
+#define NTD1 294
+#define NTD7 556
+
+int tunein[]=
+{
+ NTD1
+};
+
+float durtin[]=
+{
+ 1
+};
+
+int tuneout[]=
+{
+ NTD7
+};
+
+float durtout[]=
+{
+ 1
+};
+
+void setup() {
+  pinMode(buzzer, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  for(int x=0;x<2;x++){
+    tone(buzzer,tunein[x]);
+    delay(500*durtin[x]); 
+    noTone(buzzer);
+  }
+
+  delay(1500);
+
+  for(int x=0;x<2;x++){
+    tone(buzzer,tuneout[x]);
+    delay(500*durtout[x]); 
+    noTone(buzzer);
+  }
+
+
+  delay(10);
+}
